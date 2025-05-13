@@ -1,0 +1,6 @@
+telephone ringing
+telephone dial-tone
+telephone noise
+speech
+music
+silence

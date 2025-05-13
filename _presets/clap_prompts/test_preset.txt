@@ -1,0 +1,8 @@
+voice
+speech
+singing
+music
+laughter
+applause
+background noise
+silence 

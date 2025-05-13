@@ -80,18 +80,54 @@ This version focuses on processing single audio files.
 
 ### Gradio Web Interface
 
-1.  Ensure your virtual environment is activated.
-2.  Run the Gradio application:
-    ```bash
-    python gradio_app/app.py
-    ```
-3.  Open the displayed local URL (usually `http://127.0.0.1:7860`) in your web browser.
-4.  Upload an audio file.
-5.  Select an Audio Separation model.
-6.  Choose a CLAP Prompt Preset from the dropdown or enter your own prompts (one per line) in the text box.
-7.  (Optional) Adjust the CLAP Confidence Threshold slider.
-8.  Click "Analyze Audio".
-9.  View the status updates, the resulting JSON, and download the results file.
+The Gradio web interface provides an intuitive, interactive way to annotate single audio files using CLAP. Below is a guide to the interface and workflow:
+
+### Launching the App
+
+1. Activate your Python virtual environment (if using one).
+2. Run:
+   ```bash
+   python gradio_app/app.py
+   ```
+3. Open the provided local URL (e.g., `http://127.0.0.1:7860`) in your browser.
+
+### Interface Overview
+
+- **Audio File Upload**: Upload a single audio file (supported formats: mp3, wav, flac, etc.).
+- **Audio Separation Model Selection**: Choose from available models (e.g., Mel Band RoFormer Vocals, UVR-MDX-NET, Demucs) for separating vocals and instrumentals.
+- **CLAP Prompt Input**:
+  - **Preset Dropdown**: Select a preset of CLAP prompts from the dropdown (populated from `_presets/clap_prompts/`).
+  - **Manual Entry**: Enter custom prompts (one per line) in the text box.
+  - **Save Preset**: Enter a name and click "Save Preset" to save the current prompts for future use.
+- **Parameter Controls**:
+  - **CLAP Confidence Threshold**: Adjust the slider to set the minimum confidence for detections (default: 0.55).
+  - **Chunk Duration**: Set the duration (in seconds) for each CLAP analysis chunk (default: 3 seconds).
+  - **Audio Preservation**: Toggle whether to save separated audio files alongside the results (enabled by default).
+- **Analyze Button**: Click to start the analysis. The UI will show progress updates.
+- **Results Display**:
+  - **JSON Output**: View the structured results directly in the UI.
+  - **Download Link**: Download the results JSON file and any preserved audio files from the output directory.
+- **Status/Feedback**: The interface provides real-time feedback on progress, errors, and completion.
+
+### Typical Workflow
+
+1. Upload your audio file.
+2. Select the desired audio separation model.
+3. Choose a CLAP prompt preset or enter your own prompts.
+4. Adjust the confidence threshold and chunk duration if needed.
+5. (Optional) Save your custom prompts as a new preset.
+6. Click "Analyze Audio".
+7. Wait for processing to complete. Progress and status will be shown.
+8. Review the results in the UI and download the output files.
+
+### Output Location
+- Results are saved in a unique, timestamped subdirectory under `ClapAnnotator_Output/`.
+- The output includes a `results.json` file and, if enabled, separated audio files.
+
+### Troubleshooting
+- **ffmpeg not found**: Ensure `ffmpeg` is installed and in your system PATH.
+- **Model errors**: Check your internet connection and Hugging Face token setup.
+- **Unsupported file**: Use a supported audio format and check file integrity.
 
 ### Command Line Interface (CLI)
 
